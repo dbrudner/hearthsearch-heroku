@@ -28,6 +28,10 @@ html {
 	border: 1px solid lightgray;
 }
 
+.placeholder {
+	color: rgb(194, 194, 194);
+}
+
 .dd-cntr {
 	padding: 20px;
 }

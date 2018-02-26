@@ -40,7 +40,12 @@ class App extends Component {
 			deck: [],
 			quantity: 0,
 			fixMargin: false,
-			modal: false
+			modal: false,
+			deckName: '',
+			archetype: '',
+			description: '',
+			username: null
+
 		}
 
 	}
@@ -187,6 +192,24 @@ class App extends Component {
 			})
 		}
 		
+		axios.get('/test')
+		.then(res => {
+
+			console.log(res.data.local)
+
+			if (res.data.local) {
+				this.setState({
+					username: res.data.local.username
+				})
+			}
+
+			else {
+				this.setState({
+					permission: false
+				})
+			}
+			
+		})
 
 		
 		axios.get('/api/cards/collectible')
@@ -227,6 +250,13 @@ class App extends Component {
 			})
 		}
 	}
+
+	handleChange = (event, name) => {
+        console.log(this.state)
+        this.setState({
+            [name]: event.target.value
+        })
+    }
 
 	getFormat = format => {
 		this.setState({format})
@@ -309,9 +339,9 @@ class App extends Component {
 					</Sticky>
 				</div>
 					<div className='deck-builder-container'>
-						<Modal show={this.state.modal} onHide={this.hideModal}>
+						<Modal quantity={this.state.quantity} handleChange={this.handleChange} show={this.state.modal} onHide={this.hideModal} deckName={this.state.deckName} archetype={this.state.archetype} description={this.state.description}>
 							<div>
-								<DeckBuilderDetails quantity={this.state.quantity} deck={this.state.deck}/>
+								<DeckBuilderDetails username={this.state.username} format={this.state.format} hero={this.state.hero} quantity={this.state.quantity} deck={this.state.deck}/>
 							</div>
 						</Modal>
 							<div className='row mrg'>
