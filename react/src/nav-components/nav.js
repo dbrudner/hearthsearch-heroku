@@ -150,8 +150,8 @@ export default class Nav extends React.Component {
 						<ul className="nav navbar-nav">
 							<li className=""><Link to="/" className='nav-potato-inverted'>HearthSearch</Link></li>
 							<li className="dropdown">
-								<a className="cursor dropdown-toggle hvr-float" data-toggle="dropdown">Build
-								<span className="caret"></span></a>
+								<div className="cursor dropdown-toggle hvr-float" data-toggle="dropdown">Build
+								<span className="caret"></span></div>
 								<ul className="dropdown-menu">
 									{this.renderClasses(classes)}
 								</ul>
