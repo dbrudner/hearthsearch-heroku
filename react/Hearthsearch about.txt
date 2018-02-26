@@ -1,0 +1,18 @@
+Hearthstone project presentation
+
+-Show searching for a card throw hearthpwn and how ridiculous it is.
+-Creating a deck is also complicated. Different search mechanism.
+
+Motivation
+
+-I don't follow hearthstone much anymore, new cards get released all the time and it's difficult to keep up.
+-I sometimes watch streamers, and they're using cards I've never seen or heard of before, but I'll only catch them for a second..I'll see some small details about the card and then have difficulty finding them.
+-The seach is designed to be able to find exact cards you're looking for given only a few pieces of information.
+-Search is instantly rendered and super fast. Creating a deck isn't a seperate function.
+-Hearthpwn's build deck function is for sharing your deck. Hearthsearch's build deck function has that ability as well, but the main idea is to be able to filter for very specific cards one is building their deck around. I.e. deck archetypes which require a very certain state line or ability. The number of cards in hearthstone is getting to a really large amount (4000+ in the api return, although a lot of these aren't collectible). It's easy to forget about cards in past sets which might've been useless at the time of their release but now could have a role in conjunction with cards released later.
+
+Goals
+-Simplicity/lightweight/fast
+-It should be incredibly easy and fast to build a deck and post it or search for a card.
+-Functionality first, appearance second.
+-For the casual card searcher and serious deck builder
