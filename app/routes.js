@@ -3,7 +3,7 @@ var path = require('path')
 var mongoose = require('mongoose');
 var db = require('./models/index');
 var bodyParser = require('body-parser')
-var deckStrings = require('deckStrings')
+var deckStrings = require('deckstrings')
 
 var cardsData = require('../card-data/cards.json')
 
