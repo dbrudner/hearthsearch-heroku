@@ -5,8 +5,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import MediaQuery from 'react-responsive';
 import Swipe from 'react-easy-swipe';
-
-import Modal from 'react-modal';
+import { Modal } from 'react-bootstrap'
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 
@@ -19,6 +18,8 @@ import DeckBuilderList from './deckbuilder-components/deck-builder-list'
 import WildOrStandard from './deckbuilder-components/wild-or-standard'
 import FiltersSlide from './filter-components/filters-slide'
 import DeckInfoMobile from './deckbuilder-components/deck-info-mobile'
+import DeckBuilderDetails from './deckbuilder-components/deck-builder-details'
+
 import {StickyContainer, Sticky } from 'react-sticky'
 
 
@@ -38,28 +39,28 @@ class App extends Component {
 			format: '',
 			deck: [],
 			quantity: 0,
-			fixMargin: false
+			fixMargin: false,
+			modal: false
 		}
 
 	}
+
+	openModal = () => {
+		this.setState({
+			modal: true
+		})
+	}
 	 
 	onSwipeMove = (position, event) => {
-		console.log(`Moved ${position.x} pixels horizontally`, event);
-		console.log(`Moved ${position.y} pixels vertically`, event);
 
 		if (position.x > 50) {
 			this.setState({isFiltersPaneOpen: true})
 		}
 
 		if (position.x < -50) {
-			console.log('filter open')
 			this.setState({isPaneOpen: true})
 		}
 	}
-	
-	// onSwipeEnd(event) {
-	// 	console.log('End swiping...', event);
-	// }
 
 
 	componentWillReceiveProps(nextProps) {
@@ -155,7 +156,6 @@ class App extends Component {
 
 	componentDidMount() {
 
-		console.log(this.props)
 
 		if (this.props.match) {
 			this.setState({
@@ -188,7 +188,6 @@ class App extends Component {
 		}
 		
 
-		console.log(this.props.imported)
 		
 		axios.get('/api/cards/collectible')
 		.then((data) => {
@@ -208,24 +207,21 @@ class App extends Component {
 	}
 
 	componentWillMount() {
-		Modal.setAppElement('body');		
+		// Modal.setAppElement('body');		
 
 		window.removeEventListener('scroll', this.onScroll, false);
 
 	}
 
 	onScroll = () => {
-		console.log(window.scrollY)
 
 		if (window.scrollY >= 80) {
-			console.log('ayyy')
 			this.setState({
 				fixMargin: true
 			})
 		}
 
 		if (window.scrollY < 80) {
-			console.log('ayyy')
 			this.setState({
 				fixMargin: false
 			})
@@ -233,15 +229,12 @@ class App extends Component {
 	}
 
 	getFormat = format => {
-		console.log(format)
 		this.setState({format})
 	}
 
 	removeCard = toBeRemoved => {
 
-		console.log(toBeRemoved)
 
-		console.log(this.state.deck)
 
 		let newDeck = this.state.deck.map(card => {
             if (card.name !== toBeRemoved) {
@@ -265,6 +258,12 @@ class App extends Component {
         this.setState({
             deck: newDeck
         })
+	}
+
+	hideModal = () => {
+		this.setState({
+			modal: false
+		})
 	}
 
 	render() {
@@ -310,6 +309,11 @@ class App extends Component {
 					</Sticky>
 				</div>
 					<div className='deck-builder-container'>
+						<Modal show={this.state.modal} onHide={this.hideModal}>
+							<div>
+								<DeckBuilderDetails quantity={this.state.quantity} deck={this.state.deck}/>
+							</div>
+						</Modal>
 							<div className='row mrg'>
 								<MediaQuery query='(min-device-width: 801px)'>
 									<MediaQuery query='(max-device-width: 1600px)'>
@@ -378,7 +382,8 @@ class App extends Component {
 										{/* <div className='animated fadeIn'> */}
 											<div className='omg'>
 												<div className='decklist-bldr-cntr'>
-													<DeckBuilderList 
+													<DeckBuilderList
+														openModal={this.openModal}
 														format={this.props.format || this.state.format} 
 														deck={this.state.deck} 
 														hero={this.props.match ? this.props.match.params.class : this.state.hero} 
@@ -433,7 +438,8 @@ class App extends Component {
 										{/* <div className='animated fadeIn'> */}
 											<div className='omg'>
 												<div className='decklist-bldr-cntr'>
-													<DeckBuilderList 
+													<DeckBuilderList
+														openModal={this.openModal}													
 														format={this.props.format || this.state.format} 
 														deck={this.state.deck} 
 														hero={this.props.match ? this.props.match.params.class : this.state.hero} 
@@ -479,7 +485,8 @@ class App extends Component {
 														<div className='filters-block'>
 														</div>
 														<div className='top-mrg'>
-														<DeckBuilderList 
+														<DeckBuilderList
+															openModal={this.openModal}															
 															format={this.props.format || this.state.format} 
 															deck={this.state.deck} 
 															hero={this.props.match ? this.props.match.params.class : this.state.hero} 
@@ -521,6 +528,7 @@ class App extends Component {
 								</MediaQuery>
 							</div>
 						</div>
+						
 						</StickyContainer>
 					</Swipe>
 				</div>

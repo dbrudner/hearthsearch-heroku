@@ -8,7 +8,6 @@ export default function CardImage(props) {
     }
 
     const handleClick = (event) => {
-		console.log("HI?")
 		event.preventDefault()
 		
 		if (props.buildMode) {

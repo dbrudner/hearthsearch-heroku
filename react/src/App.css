@@ -28,6 +28,10 @@ html {
 	border: 1px solid lightgray;
 }
 
+.dd-cntr {
+	padding: 20px;
+}
+
 .deckbox-hero {
 	text-align: right
 }

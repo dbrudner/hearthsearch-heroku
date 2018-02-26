@@ -9,6 +9,7 @@ import DeckCardsLeft from './deck-builder-cards-left'
 import Submit from './deck-builder-submit'
 import DeckAverageMana from './deck-average-mana'
 
+
 export default class Deck extends Component {
 
     constructor(props) {
@@ -17,7 +18,7 @@ export default class Deck extends Component {
         this.state = {
             deck: [],
             userId: '',
-            dust: 0
+            dust: 0,
         }
     }
 
@@ -72,6 +73,11 @@ export default class Deck extends Component {
             }
     
             }, 0)
+    }
+
+    openModal = () => {
+        console.log('hi')
+        this.props.openModal()
     }
 
     removeCard = toBeRemoved => {
@@ -136,12 +142,7 @@ export default class Deck extends Component {
                             <DeckCardsLeft deck={this.props.deck} />
                         </div>
                         <div>
-                            {
-                                totalCards > 0 ? 
-                                <Submit format={this.props.format} hero={this.props.hero} userId={this.state.userId} deck={this.props.deck} name='name' archetype='archetype' cost={1200} /> 
-                                : 
-                                    <button disabled className='btn next-page-btn-fail hvr-fade animated fadeIn'><span className='submit-btn-text'>Deck Must Have 30 Cards</span></button>
-                            }                        
+                            <button onClick={this.openModal} className='btn next-page-btn-fail hvr-fade animated fadeIn'><span className='submit-btn-text'>Enter Details and Submit</span></button>                       
                         </div>
                     </div>
                         <DeckManaChart deck={this.props.deck} curve={this.state.curve}/>
