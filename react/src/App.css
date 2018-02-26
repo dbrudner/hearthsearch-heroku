@@ -1257,6 +1257,10 @@ svg {
 	border-left: 1px solid rgb(160, 160, 160);
 }
 
+.svg-inline--fa {
+	border: none;
+}
+
 .decklist-cntr {
 	margin-top: 20px;
 	padding-top: 30px;

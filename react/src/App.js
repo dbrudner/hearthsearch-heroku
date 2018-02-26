@@ -39,7 +39,6 @@ const App = () => {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/logout' component={Logout} />
                 <Route exact path='/build' component={ChooseClass} />
-                <Route exact path='/analytics' component={Analytics} />
                 
                 <Route exact path='/deck/:deckId' component={SingleDeck} />
                 <Route exact path='/decks' component={DeckSearch} />

@@ -43,7 +43,6 @@ export default class Nav extends React.Component {
 			if (response.data) {
 
 				console.log(response.data)
-				console.log(response.data.local._id)
 				
 
 				this.setState(() => {
@@ -151,7 +150,7 @@ export default class Nav extends React.Component {
 						<ul className="nav navbar-nav">
 							<li className=""><Link to="/" className='nav-potato-inverted'>HearthSearch</Link></li>
 							<li className="dropdown">
-								<a className="dropdown-toggle hvr-float" data-toggle="dropdown" href="#">Build
+								<a className="cursor dropdown-toggle hvr-float" data-toggle="dropdown">Build
 								<span className="caret"></span></a>
 								<ul className="dropdown-menu">
 									{this.renderClasses(classes)}
