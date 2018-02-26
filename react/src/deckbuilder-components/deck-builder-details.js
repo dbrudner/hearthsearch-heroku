@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import _ from 'lodash'
+import { Redirect } from 'react-router-dom';
+
 
 export default class DeckBuilderDetails extends Component {
     
@@ -13,7 +15,7 @@ export default class DeckBuilderDetails extends Component {
             decks: [],
             archetypes: [],
             description: '',
-            redirectTo: null,
+            reDirect: null,
 			deckName: '',
 			archetype: '',
 			description: ''
@@ -60,10 +62,18 @@ export default class DeckBuilderDetails extends Component {
     handleSubmit = event => {
         event.preventDefault()
 
+        const deck = this.state.deck.map(card => {
+            return {
+                _id: card._id,
+                cardQuantity: card.quantity}
+            })
+
+        console.log(deck)
+
         const data = {
             name: this.state.deckName,
             archetype: this.state.archetype,
-            cards: this.state.deck,
+            cards: deck,
             format: this.props.format,
             user: this.props.username,
             source: 'HearthSearch',
@@ -71,7 +81,12 @@ export default class DeckBuilderDetails extends Component {
         }
 
         axios.post('/newdeck', data)
-        .then(res => console.log(res))
+        .then(res => {
+            const id = res.data._id
+            this.setState({
+                reDirect: `/deck/${id}`
+            })
+        })
 
     }
     
@@ -96,6 +111,22 @@ export default class DeckBuilderDetails extends Component {
                 )
             }
 
+            if (!this.state.deckName) {
+                return (
+                    <div>
+                        Please enter a name
+                    </div>
+                )
+            }
+
+            if (!this.state.archetype || this.state.archetype == 'none' || this.state.archetype == 'None') {
+                return (
+                    <div>
+                        Please enter an archetype
+                    </div>
+                )
+            }
+
             else {
                 return (
                     <div>
@@ -113,6 +144,10 @@ export default class DeckBuilderDetails extends Component {
                     </option>
                 )
         })
+
+        if (this.state.reDirect) {
+            return <Redirect to={{ pathname: this.state.reDirect }} />
+        } 
 
 
         return (

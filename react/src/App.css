@@ -36,6 +36,12 @@ html {
 	padding: 20px;
 }
 
+.no-comments {
+	border-bottom: 1px solid lightgray;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+
 .deckbox-hero {
 	text-align: right
 }

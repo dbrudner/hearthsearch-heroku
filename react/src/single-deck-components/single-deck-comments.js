@@ -35,9 +35,20 @@ export default function Comments(props) {
     }
 
 
-    return (
-        <div>
-            {renderComments(props.comments)}
-        </div>
-    )
+    if (props.comments.length > 0) {
+        return (
+            <div>
+                {renderComments(props.comments)}
+            </div>
+        )
+    }
+    else {
+        return (
+            <div className='no-comments'>
+                No comments
+            </div>
+        )
+    }
+
+    
 }
