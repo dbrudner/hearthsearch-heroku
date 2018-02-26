@@ -21,7 +21,9 @@ export default class Nav extends React.Component {
 			checkedLoggedin: false,
 			loginModal: false,
 			signupModal: false,
-			importModal: false
+			importModal: false,
+			username: '',
+			userId: ''
 
 		}
 	}
@@ -39,10 +41,17 @@ export default class Nav extends React.Component {
 				checkedLoggedin: true
 			})
 			if (response.data) {
+
+				console.log(response.data)
+				console.log(response.data.local._id)
+				
+
 				this.setState(() => {
 					return {
 						isLoggedIn: true,
-						email: response.data.local.email
+						email: response.data.local.email,
+						username: response.data.local.username,
+						userId: response.data._id
 					}
 				})
 			}
@@ -154,6 +163,7 @@ export default class Nav extends React.Component {
 						<ul className="nav navbar-nav navbar-right">
 							{/* <li className='hvr-float'><Link to="/signup"><span className="glyphicon glyphicon-user"></span> Sign Up</Link></li> */}
 							{/* <li onClick={this.login} className='hvr-float'><a><span className="glyphicon glyphicon-log-in"></span> Login</a></li> */}
+							<li onClick={this.logout} className='hvr-float'><Link to={`/profile/${this.state.userId}`}><span className="glyphicon glyphicon-user"></span> {this.state.username}</Link></li>							
 							<li onClick={this.logout} className='hvr-float'><Link to='/logout'><span className="glyphicon glyphicon-log-out"></span> Logout</Link></li>
 						</ul>
 						</div>

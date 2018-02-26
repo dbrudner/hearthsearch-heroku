@@ -36,6 +36,8 @@ html {
 	padding: 20px;
 }
 
+
+
 .no-comments {
 	border-bottom: 1px solid lightgray;
 	padding-left: 10px;
@@ -1274,8 +1276,9 @@ svg {
 	margin-top: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	width: 177px;
+	width: 180px;
 	overflow-x: hidden;
+	padding-left: 0px;
 }
 
 .decklist-bldr-cntr {
