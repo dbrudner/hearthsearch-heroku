@@ -6,7 +6,8 @@ import CardCardset from '../card-components/card-cardset'
 import CardPopularity from '../card-components/card-popularity'
 import axios from 'axios'
 import { Modal } from 'react-bootstrap'
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { BeatLoader } from 'react-spinners';
 
 export default class DeckSearchResults extends React.Component {
 
@@ -15,7 +16,8 @@ export default class DeckSearchResults extends React.Component {
 
         this.state = {
             deckString: '',
-            showModal: false
+            showModal: false,
+            copied: false
         }
     }
 
@@ -36,7 +38,8 @@ export default class DeckSearchResults extends React.Component {
     
         const handleClose = () => {
             this.setState({
-                showModal: false
+                showModal: false,
+                copied: false
             })
         }
 
@@ -115,6 +118,16 @@ export default class DeckSearchResults extends React.Component {
         }
     
         const renderResults = (results) => {
+            if (results.length === 0) {
+                return (
+                    <div className='loader-cntr center-block text-center'>
+                        <BeatLoader
+                            size={15}
+                            margin='2px'
+                        />	
+                    </div>
+                )
+            }
             
             return results.map(result => {
                 
@@ -187,14 +200,24 @@ export default class DeckSearchResults extends React.Component {
         return (
             <div className=''>
                 <Modal show={this.state.showModal} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Deck String</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div className='deckstring'>
-                        {this.state.deckString || 'Loading'}
-                    </div>
-                </Modal.Body>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Deck String</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className='deckstring'>
+                            {this.state.deckString || 'Loading'}
+                        </div>
+                        <div className='text-center'>
+                            <CopyToClipboard text={this.state.deckString} onCopy={() => this.setState({copied: 'Copied'})}>
+                                <div class="btn btn-success export-deckstring-btn">
+                                    <span class="glyphicon glyphicon-copy"></span> Copy 
+                                </div>
+                            </CopyToClipboard>
+                            <div>
+                                {this.state.copied || null}
+                            </div>
+                        </div>
+                    </Modal.Body>
                 </Modal>
                 {renderResults(this.props.matches)}
             </div>

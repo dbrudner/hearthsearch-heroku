@@ -8,6 +8,8 @@ import Searchbar from '../searchbar'
 import DeckSearchResults from './deck-search-results'
 import DeckSearchBanner from './deck-search-banner'
 import DeckSearchRow from './deck-search-row'
+import { BeatLoader } from 'react-spinners';
+
 
 export default class DeckSearch extends React.Component {
     constructor(props) {
@@ -151,6 +153,15 @@ export default class DeckSearch extends React.Component {
                     <DeckSearchRow totalResults={totalResults} getFilter={this.getFilter} decks={this.state.decks} archetypes={this.state.archetypes} matches={this.state.renderMatches} getFilter={this.getFilter}/>
                 </div>
             )
+        } else {
+            return (
+				<div className='loader-cntr center-block text-center'>
+					<BeatLoader
+						size={15}
+						margin='2px'
+					/>	
+				</div>
+			)
         }
         
     }

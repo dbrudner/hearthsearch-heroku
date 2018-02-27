@@ -17,6 +17,14 @@ html {
 	margin: 0;
 }
 
+.loader-cntr {
+	margin-top: 50px;
+}
+
+.export-deckstring-btn {
+	margin-top: 20px;
+	text-align: left;
+}
 
 .deck-search-panel {
 	border-radius: 5px;

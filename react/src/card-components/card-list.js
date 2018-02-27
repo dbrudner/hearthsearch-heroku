@@ -7,6 +7,8 @@ import DeckBuilderCardInfo from './deck-builder-card-info'
 import _ from 'lodash'
 import axios from 'axios'
 
+import { BeatLoader } from 'react-spinners';
+
 export default class CardList extends React.Component {
 
 	constructor(props) {
@@ -36,11 +38,6 @@ export default class CardList extends React.Component {
 			}, () => {
 				this.search(nextProps)				
 			})
-
-			// this.setState({
-			// }, () => {
-			// 	this.search(nextProps)				
-			// })
 		}
 
 	}
@@ -718,8 +715,11 @@ export default class CardList extends React.Component {
 
 		if (!this.props.cards) {
 			return (
-				<div>
-					Loading
+				<div className='loader-cntr center-block text-center'>
+					<BeatLoader
+						size={15}
+						margin='2px'
+					/>	
 				</div>
 			)
 		}
