@@ -169,7 +169,7 @@ export default class DeckImport extends Component {
                     </div>
                 </Modal>
                     
-                    {this.state.quantity === 30 ? <DeckBuilder imported format={this.state.format} hero={this.state.hero} deck={this.state.deck}/> : <div></div>}
+                    {this.state.quantity === 30 ? <DeckBuilder deckBuilder imported format={this.state.format} hero={this.state.hero} deck={this.state.deck}/> : <div></div>}
             </div>
 		)
 	}

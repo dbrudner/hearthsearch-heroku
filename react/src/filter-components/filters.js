@@ -74,7 +74,7 @@ export default class Filters extends React.Component {
 							</div>
 
 
-							{!this.props.imported ? <div className='col-sm-12 '>
+							{!this.props.deckBuilder ? <div className='col-sm-12 '>
 								<DropDown filterName='Game Format' filter='gameFormat' onChange={this.getFilter}  options={gameFormats}/>
 							</div> : null}
 
@@ -142,6 +142,8 @@ export default class Filters extends React.Component {
 
 
 	render() {
+
+		console.log(this.props.deckBuilder)
 
 		return (
 			<div>
