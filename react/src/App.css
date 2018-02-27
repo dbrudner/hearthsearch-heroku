@@ -1260,11 +1260,6 @@ label {
 	font-size: 10px;
 }
 
-svg {
-	border-bottom: 1px solid rgb(150, 150, 150);
-	border-left: 1px solid rgb(160, 160, 160);
-}
-
 .svg-inline--fa {
 	border: none;
 }
