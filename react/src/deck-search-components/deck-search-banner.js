@@ -1,7 +1,7 @@
 import React from 'react'
 import {Popover, OverlayTrigger} from 'react-bootstrap'
 import DeckSearchbar from './deck-searchbar'
-import {PieChart} from 'react-easy-chart'
+import {PieChart, ToolTip} from 'react-easy-chart'
 
 
 export default class DeckSearchBanner extends React.Component {
@@ -12,9 +12,56 @@ export default class DeckSearchBanner extends React.Component {
         this.state = {
             dataDisplay: '',
             totalWildDecks: 0,
-            totalStandardDecks: 0
+            totalStandardDecks: 0,
+            showToolTip: false,
+            value: null
         }
     }
+
+    mouseMoveHandler(e) {
+        if (this.state.showToolTip) {
+          this.setState({top: e.y, left: e.x});
+        }
+    }
+
+    
+    mouseOverHandler = (d, e) => {
+        this.setState({
+            showToolTip: true,
+            top: e.clientY,
+            left: e.clientX,
+            value: d.value,
+            key: d.data.key});
+    }
+
+  mouseMoveHandler = e => {
+
+    if (this.state.showToolTip) {
+        this.setState({top: e.clientY, left: e.clientX});
+    }
+  }
+
+  mouseOutHandler = () => {
+    this.setState({showToolTip: false});
+  }
+
+  createTooltip = () => {
+    if (this.state.showToolTip) {
+        return (
+            <div className='text-center'>
+                <strong><span className={this.state.key.toLowerCase()}>{this.state.key}</span></strong>
+                : {this.state.value.toFixed(2)}%
+            </div>
+        );
+    } else {
+        return (
+            <div className='text-center invisible'>
+                Class: Value
+            </div>
+        )
+    }
+    
+  }
 
     componentWillReceiveProps(nextProps) {
 
@@ -45,9 +92,10 @@ export default class DeckSearchBanner extends React.Component {
     }
 
     render() {
+
+
         const decks = this.props.decks
 
-        console.log('decks', decks)
 
         const decksByClass = format => {
 
@@ -55,8 +103,18 @@ export default class DeckSearchBanner extends React.Component {
 
             if (format) {
                 const render = () => {
+
+                    const sumOfAllDecks = decks.reduce((acc, deck) => {
+                        if (deck.format.toLowerCase() === format) {
+                            return acc = acc + 1
+                        } else {
+                            return acc
+                        }
+                    }, 0)
+
+
                     const data = classes.map(hero => {
-        
+
                         const sumOfDecks = decks.reduce((acc, deck) => {
                             if (deck.hero.toLowerCase() === hero.toLowerCase() && deck.format.toLowerCase() === format) {
                                 return acc = acc + 1
@@ -65,10 +123,14 @@ export default class DeckSearchBanner extends React.Component {
                             }
                         }, 0)
         
+                        let value = ((sumOfDecks/sumOfAllDecks) * 100)
+                        
+
+
                         return (
                             {
                                 key: hero,
-                                value: sumOfDecks
+                                value: value
                             }
                         )
 
@@ -77,11 +139,11 @@ export default class DeckSearchBanner extends React.Component {
                     return (
                         <div className='pi-pad'>
                             <PieChart 
-                                labels 
-                                clickHandler={d => {this.setState({hero: d.data.key, dataDisplay:`${d.value} ${d.data.key} decks` })}} 
                                 data={data} 
                                 size={200} 
                                 innerHoleSize={100}
+                                mouseOverHandler={this.mouseOverHandler}
+                                mouseOutHandler={this.mouseOutHandler}
                             />
                         </div>
                     )
@@ -89,12 +151,19 @@ export default class DeckSearchBanner extends React.Component {
                 return (
                     <div>
                         {render()}
+                        {this.createTooltip()}                        
                     </div>
                 )
             } else {
                 const render = () => {
                     const data = classes.map(hero => {
         
+                        const sumOfAllDecks = decks.reduce((acc, deck) => {
+                            return acc + 1
+                        }, 0)
+                        
+
+
                         const sumOfDecks = decks.reduce((acc, deck) => {
                             if (deck.hero.toLowerCase() === hero.toLowerCase()) {
                                 return acc = acc + 1
@@ -103,21 +172,23 @@ export default class DeckSearchBanner extends React.Component {
                             }
                         }, 0)
         
+                        let value = ((sumOfDecks/sumOfAllDecks) * 100)
+
                         return (
                             {
                                 key: hero,
-                                value: sumOfDecks
+                                value
                             }
                         )
                     })
                     return (
                         <div className='pi-pad'>
                             <PieChart 
-                                labels 
-                                clickHandler={d => {this.setState({hero: d.data.key, dataDisplay:`${d.value} ${d.data.key} decks` })}} 
                                 data={data} 
                                 size={200} 
                                 innerHoleSize={100}
+                                mouseOverHandler={this.mouseOverHandler}
+                                mouseOutHandler={this.mouseOutHandler}
                             />
                         </div>
                     )
@@ -126,6 +197,7 @@ export default class DeckSearchBanner extends React.Component {
                     return (
                         <div>
                             {render()}
+                            {this.createTooltip()}
                         </div>
                     ) 
                 
@@ -152,7 +224,7 @@ export default class DeckSearchBanner extends React.Component {
 
         if (this.state.totalWildDecks) {
             return (
-                <div className='deck-search-panel'>
+                <div onMouseMove={this.mouseMoveHandler} className='deck-search-panel'>
                     
                     <div className='deck-search-hdr'>
                         Deck Search
