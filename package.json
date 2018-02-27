@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "acorn": "^5.5.0",
     "acorn-dynamic-import": "^3.0.0",
     "async-waterfall": "^0.1.5",
     "axios": "^0.17.1",
@@ -21,7 +22,6 @@
     "deckstrings": "^2.0.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
-    "hearthstone-react-app": "file:react",
     "method-override": "^2.3.10",
     "mongoose": "^5.0.3",
     "morgan": "^1.9.0",
