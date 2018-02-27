@@ -136,7 +136,7 @@ class Home extends Component {
 						<div className='deck-builder-container'>
 					
 							<div className='row'>
-								<div className='col-xs-12 col-md-3 col-lg-2 col-xs-12'>
+								<div className='filters-cntr col-xs-12 col-md-3 col-lg-2 col-xs-12'>
 									{this.state.filterOn ? 
 										<Filters getFilter={this.getFilter}/> : <div />}
 								</div>
@@ -179,7 +179,7 @@ class Home extends Component {
 				<div className='deck-builder-container'>
 					
 					<div className='row'>
-						<div className='col-xs-12 col-md-3 col-lg-2 col-xs-12'>
+						<div className='filters-cntr col-xs-12 col-md-3 col-lg-2 col-xs-12'>
 							{this.state.filterOn ? 
 								<Filters getFilter={this.getFilter}/> : <div />}
 						</div>

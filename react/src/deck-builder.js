@@ -348,13 +348,13 @@ class App extends Component {
 								<MediaQuery query='(min-device-width: 801px)'>
 									<MediaQuery query='(max-device-width: 1600px)'>
 									
-										<div className='col-xs-3'>
+										<div className='db-filters-cntr col-xs-3'>
 											<Filters imported={this.props.imported} deckBuilder={true} getFilter={this.getFilter}/>
 										</div>
 									</MediaQuery>
 									<MediaQuery query='(min-device-width: 1600px)'>
 									
-										<div className='col-xs-2 col-xs-offset-1'>
+										<div className='db-filters-cntr col-xs-2 col-xs-offset-1'>
 											<Filters imported={this.props.imported} deckBuilder={true} getFilter={this.getFilter}/>
 										</div>
 									</MediaQuery>

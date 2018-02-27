@@ -244,9 +244,9 @@ export default class CardList extends React.Component {
 			})
 		}
 
-		if (thisProps.minHealth && thisProps.minHealth !== 'None') {
+		if (thisProps.maxHealth && thisProps.maxHealth !== 'None') {
 			matches = matches.filter((card) => {
-				return card.health <= thisProps.minHealth;
+				return card.health <= thisProps.maxHealth;
 			})
 		}
 		

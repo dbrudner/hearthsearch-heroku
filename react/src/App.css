@@ -26,6 +26,18 @@ html {
 	text-align: left;
 }
 
+.filters-cntr {
+	margin-top: -17.5px;
+	margin-left: -16px;
+	border-radius: 0;
+}
+
+.db-filters-cntr {
+	margin-top: -15px;
+	margin-left: -16px;
+	border-radius: 0;
+}
+
 .deck-search-panel {
 	border-radius: 5px;
 	background-color: white;
@@ -1314,7 +1326,9 @@ label {
 }
 
 .filter-panel-heading {
-	background-color:  rgb(50, 0, 83) !important;	
+	background-color: rgb(255, 217, 0) !important;
+	color: #320053 !important;
+	font-weight: 700;
 }
 
 .panel-body {

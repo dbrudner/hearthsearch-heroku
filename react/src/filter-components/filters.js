@@ -148,13 +148,6 @@ export default class Filters extends React.Component {
 		return (
 			<div>
 				<div className='panel panel-default'>
-					<div className='panel-heading filter-panel-heading'>
-						<div className='filter-heading-cntr'>
-							<div className='filters-hdr'>
-								Filters
-							</div>
-						</div>
-					</div>
 					<div className='panel-body'>
 						{this.showFilter()}
 					</div>
